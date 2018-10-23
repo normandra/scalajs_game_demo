@@ -8,6 +8,8 @@ to apply changes:
 
     sbt fastOptJS
 
+then open index.html
+
 
 includes codes from 
 
