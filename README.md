@@ -12,4 +12,5 @@ to apply changes:
 includes codes from 
 
 https://github.com/vmunier/scalajs-simple-canvas-game
+
 https://github.com/lihaoyi/scala-js-games
