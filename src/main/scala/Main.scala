@@ -261,7 +261,7 @@ object Main {
 
 
       if (keysDown.contains(KeyCode.D)) {
-        if(use_smh) use_smh = !use_smh
+        if(!use_smh) use_smh = !use_smh
       }
 
       //clear shm
