@@ -209,10 +209,13 @@ object Main {
     val canvas = dom.document.createElement("canvas").asInstanceOf[Canvas]
     val ctx = canvas.getContext("2d").asInstanceOf[dom.CanvasRenderingContext2D]
 
+    var use_smh = true
+
     val maxWidth = (0.95 * dom.window.innerWidth).toInt
     val maxHeight = (0.95 * dom.window.innerHeight).toInt
 
     val ball_size = 20
+    var fps = 0
 
     canvas.width = maxWidth
     canvas.height = maxHeight
@@ -230,6 +233,18 @@ object Main {
 
     val spatialHashManager = new SpatialHashManager(maxWidth,maxHeight,50)
 
+    // Handle keyboard controls
+    import scala.collection.mutable.HashMap
+    val keysDown = HashMap[Int, Boolean]()
+
+    dom.window.addEventListener("keydown", (e: dom.KeyboardEvent) => {
+      keysDown += e.keyCode -> true
+    }, false)
+
+    dom.window.addEventListener("keyup", (e: dom.KeyboardEvent) => {
+      keysDown -= e.keyCode
+    }, false)
+
     // Reset the game
     def reset() = {
 
@@ -237,7 +252,17 @@ object Main {
 
     // Update
     def update(modifier: Double): Unit = {
-      Console.println(modifier)
+//      Console.println(modifier)
+      fps = (1000 / modifier).toInt
+
+      if (keysDown.contains(KeyCode.S)) {
+        if(use_smh) use_smh = !use_smh
+      }
+
+
+      if (keysDown.contains(KeyCode.D)) {
+        if(use_smh) use_smh = !use_smh
+      }
 
       //clear shm
       spatialHashManager.ClearBuckets()
@@ -249,10 +274,18 @@ object Main {
         spatialHashManager.RegisterObject(ball)
       }
 
-      for (ball <- balls_array) {
-//        Console.println("get nearby " +  spatialHashManager.GetNearby(ball).toString())
-//        spatialHashManager.CheckCollision(ball,balls_array)
-        spatialHashManager.CheckCollision(ball,spatialHashManager.GetNearby(ball))
+      if (use_smh){
+        for (ball <- balls_array) {
+          //        Console.println("get nearby " +  spatialHashManager.GetNearby(ball).toString())
+//                  spatialHashManager.CheckCollision(ball,balls_array)
+          spatialHashManager.CheckCollision(ball,spatialHashManager.GetNearby(ball))
+        }
+      }else{
+        for (ball <- balls_array) {
+          //        Console.println("get nearby " +  spatialHashManager.GetNearby(ball).toString())
+                  spatialHashManager.CheckCollision(ball,balls_array)
+//          spatialHashManager.CheckCollision(ball,spatialHashManager.GetNearby(ball))
+        }
       }
 
 
@@ -298,6 +331,16 @@ object Main {
 //        ctx.lineTo(maxWidth,n)
 //        ctx.stroke()
 //      }
+
+      ctx.fillStyle = Color.Magenta
+
+      if(use_smh){
+        ctx.font = "50px Arial"
+        ctx.fillText("smh:" +fps.toString,10,50)
+      }else{
+        ctx.font = "50px Arial"
+        ctx.fillText(fps.toString,10,50)
+      }
 
     }
 
