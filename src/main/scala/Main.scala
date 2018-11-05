@@ -349,20 +349,20 @@ object Main {
 
       ball.state match {
         case 0 =>
-          ctx.fillStyle = Color.White
+          ctx.fillStyle = Color.Yellow
           ctx.strokeStyle = Color.White
 
         case 1 =>
-          ctx.fillStyle = Color.Red
+          ctx.fillStyle = Color.Green
           ctx.strokeStyle = Color.Red
 
         case 2 =>
-          ctx.fillStyle = Color.Blue
-          ctx.strokeStyle = Color.Blue
+          ctx.fillStyle = Color.Red
+          ctx.strokeStyle = Color.Red
 
         case 3 =>
-          ctx.fillStyle = Color.Green
-          ctx.strokeStyle = Color.Green
+          ctx.fillStyle = Color.Blue
+          ctx.strokeStyle = Color.Blue
 
       }
 
