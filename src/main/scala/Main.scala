@@ -229,7 +229,7 @@ object Main {
     canvas.height = maxHeight
     dom.document.body.appendChild(canvas)
 
-    val num_balls = 2000
+    val num_balls = 2001
     //    val balls_array = Array.fill[Ball](num_balls)(new Ball(Point(maxWidth/2,maxHeight/2), Point(8 * (Random.nextInt(4) - 0.5), 8 * (Random.nextInt(4) - 0.5)),30,Random.nextInt(4)))
     var balls_array = ListBuffer[Ball]()
 
