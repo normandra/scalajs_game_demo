@@ -49,8 +49,8 @@ object Color {
 }
 
 class SpatialHashManager(width: Int, height: Int, cellSize: Int){
-  val Cols= width / cellSize;
-  val Rows= height / cellSize;
+  val Cols= Math.floor((width + cellSize) / cellSize).toInt;
+  val Rows= Math.floor((height + cellSize) / cellSize).toInt;
   val Buckets = new mutable.HashMap[Int,ListBuffer[Ball]]()
 
   var iii = 0
@@ -80,7 +80,15 @@ class SpatialHashManager(width: Int, height: Int, cellSize: Int){
 //    Console.println(cellIds.toString())
     cellIds.foreach(id => {
 //      Console.println(Buckets.size)
-        Buckets(id) += ball
+
+      Buckets(id) += ball
+//
+//        if (Buckets.keySet.contains(id)){
+//          Buckets(id) += ball
+//        }else{
+//          Buckets += (id -> ListBuffer())
+//          Buckets (id) += ball
+//        }
     })
   }
 
@@ -231,7 +239,7 @@ object Main {
     }
 
 
-    val spatialHashManager = new SpatialHashManager(maxWidth,maxHeight,50)
+    val spatialHashManager = new SpatialHashManager(maxWidth,maxHeight,20)
 
     // Handle keyboard controls
     import scala.collection.mutable.HashMap
@@ -387,6 +395,6 @@ object Main {
     }
     reset()
 
-    dom.window.setInterval(gameLoop, 10)
+    dom.window.setInterval(gameLoop, 1)
   }
 }
