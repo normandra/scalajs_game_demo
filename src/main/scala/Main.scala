@@ -222,7 +222,7 @@ object Main {
     val maxWidth = (0.95 * dom.window.innerWidth).toInt
     val maxHeight = (0.95 * dom.window.innerHeight).toInt
 
-    val ball_size = 10
+    val ball_size = 5
     var fps = 0
 
     canvas.width = maxWidth
@@ -239,7 +239,7 @@ object Main {
     }
 
 
-    val spatialHashManager = new SpatialHashManager(maxWidth,maxHeight,ball_size + ball_size/2)
+    val spatialHashManager = new SpatialHashManager(maxWidth,maxHeight,15 * ball_size)
 
     // Handle keyboard controls
     import scala.collection.mutable.HashMap
